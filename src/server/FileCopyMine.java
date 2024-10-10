@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FileCopy {
+public class FileCopyMine {
 
     //copy and paste myFile from FileCopy client to FileServer server under the same name e.g. myfile via dataoutputstream
     //1st we send over file name, writeUTF()
@@ -30,7 +30,7 @@ public class FileCopy {
         String fileDirect = "src/server/catinthehat.txt";
             Path path = Paths.get(fileDirect);
             File file = new File(fileDirect);
-        String fileName = fileDirect.replace("src/server/", "");
+        String fileName = file.getName();
         long fileSize = file.length();
         byte[] fileBytes = Files.readAllBytes(path);
 
@@ -44,11 +44,27 @@ public class FileCopy {
         BufferedInputStream bis = new BufferedInputStream(is);
         DataInputStream dis = new DataInputStream(bis); //String line = dis.readUTF();
 
+        // //attempt transfer******************************************************
+        //     FileInputStream fis = new FileInputStream(file);
+        //     int readBytes = 0;
+        //     int sendBytes = 0;
+        //     //create byte buffer
+        //     byte[] buff = new byte[4 * 1024];
 
-        //write to server
+        //     //file finishes being read when readBytes = -1
+        //     while((readBytes = fis.read(buff)) > 0){
+        //         sendBytes += readBytes;
+        //         dos.write(buff, 0, readBytes); // transference code
+        //         System.out.printf("sent %d of %d\n", sendBytes, fileSize);
+        //     }
+
+
+
+        //write info to server
         dos.writeUTF(fileName);
         dos.writeLong(fileSize);
-        dos.write(fileBytes);
+        dos.write(fileBytes);// check
+        
         //flush in reverse order of os being wrapped
         dos.flush();
         bos.flush();
@@ -58,10 +74,12 @@ public class FileCopy {
         String fromServer = dis.readUTF();
         System.out.printf(">>>Server: %s\n", fromServer);
 
-        //closing
-        os.close();
+        //closing, dont need to flush niput stream
         dos.close();
+        bos.close();
+        os.close();
         dis.close();
+        // fis.close();
         socky.close();
 
     }

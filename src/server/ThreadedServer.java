@@ -40,7 +40,10 @@ public class ThreadedServer {
         ClientHandler handler = new ClientHandler(sock);
 
         thrPool.submit(handler);
+        server.close();
+
         }
+
 
     }
 }

@@ -62,7 +62,8 @@ public class ServerMain {
         os.close();
         is.close();
         sock.close();
-
+        server.close();
+        
         }
 
     }
