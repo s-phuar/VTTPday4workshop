@@ -32,6 +32,7 @@ public class FileCopyNew {
         DataOutputStream dos = new DataOutputStream(bos); // we will write structured bytes into this
 
         //opening stream to hold byte data to transfer over
+        //read file via bis and send it over connection(dos)
         FileInputStream fis = new FileInputStream(file); // good for raw bytes
         BufferedInputStream bis = new BufferedInputStream(fis);
 
@@ -48,7 +49,7 @@ public class FileCopyNew {
         //dos.write writes from buffer to dos (DataOutputStream)
         while((readBytes = bis.read(buffer)) != -1){
             dos.write(buffer, 0, readBytes);
-            sendBytes += readBytes; //assumulate senBytes
+            sendBytes += readBytes; //accumulate sendBytes
             System.out.printf("Sending %d byte data to DataOutputStream, out of %d\n", sendBytes, fileSize);
         }
 

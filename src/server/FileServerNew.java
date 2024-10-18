@@ -31,6 +31,7 @@ public class FileServerNew {
             long fileSize = dis.readLong();
 
             //create file based on filename
+            //read file from connection (dis) and write it out via bos
             FileOutputStream fos = new FileOutputStream(fileName);
             BufferedOutputStream bos = new BufferedOutputStream (fos);
 

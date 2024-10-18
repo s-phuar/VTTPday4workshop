@@ -25,7 +25,6 @@ public class ClientMain {
 
         System.out.println("Connected!");
 
-
         Console cons = System.console();
         //write a messaage to the server
         String theMessage = cons.readLine("Input: ");
@@ -41,7 +40,7 @@ public class ClientMain {
         Reader reader = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(reader);
 
-        //write the message out
+        //write the message out to server
         bw.write(theMessage);
         bw.newLine();
         bw.flush(); // do NOT close streams or connection cuts
